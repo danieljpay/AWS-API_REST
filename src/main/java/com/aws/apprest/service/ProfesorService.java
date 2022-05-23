@@ -13,7 +13,7 @@ public class ProfesorService {
     @Autowired
     private ProfesorRepository profesorRepository;
 
-    private int getIndex(int id) {
+    private int getIndex(long id) {
         int index = -1;
         if(profesorRepository.getProfesores().isEmpty()) {
             return index;
@@ -24,10 +24,10 @@ public class ProfesorService {
                 return index;
             }
         }
-        return index;
+        return -1;
     }
 
-    public Profesor get(int id) {
+    public Profesor get(long id) {
         for(Profesor unProfesor : profesorRepository.getProfesores()) {
             if(unProfesor.getId() == id) {
                 return unProfesor;
@@ -40,9 +40,9 @@ public class ProfesorService {
         return profesorRepository.getProfesores();
     }
 
-    public boolean update(int id, Profesor profesor) {
+    public boolean update(long id, Profesor profesor) {
         int index = getIndex(id);
-        if( index > -1) {
+        if( index != -1) {
             profesorRepository.getProfesores().set(index, profesor);
             return true;
         }
@@ -53,9 +53,9 @@ public class ProfesorService {
         return profesorRepository.getProfesores().add(profesor);
     }
 
-    public boolean delete(int id) {
+    public boolean delete(long id) {
         int index = getIndex(id);
-        if( index > -1 ) {
+        if( index != -1 ) {
             profesorRepository.getProfesores().remove(index);
             return true;
         }

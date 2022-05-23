@@ -13,7 +13,7 @@ public class AlumnoService {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
-    public int getIndex(int id) {
+    private int getIndex(long id) {
         int index = -1;
         if(alumnoRepository.getAlumnos().isEmpty()) {
             return index;
@@ -24,10 +24,10 @@ public class AlumnoService {
                 return index;
             }
         }
-        return index;
+        return -1;
     }
 
-    public Alumno get(int id) {
+    public Alumno get(long id) {
         for(Alumno unAlumno : alumnoRepository.getAlumnos()) {
             if(unAlumno.getId() == id) {
                 return unAlumno;
@@ -40,9 +40,9 @@ public class AlumnoService {
         return alumnoRepository.getAlumnos();
     }
 
-    public boolean update(int id, Alumno alumno) {
+    public boolean update(long id, Alumno alumno) {
         int index = getIndex(id);
-        if (index > -1) {
+        if (index != -1) {
             alumnoRepository.getAlumnos().set(index, alumno);
             return true;
         }
@@ -53,9 +53,9 @@ public class AlumnoService {
         return alumnoRepository.getAlumnos().add(alumno);
     }
 
-    public boolean delete(int id) {
+    public boolean delete(long id) {
         int index = getIndex(id);
-        if(index > -1) {
+        if(index != -1) {
             alumnoRepository.getAlumnos().remove(index);
             return true;
         }

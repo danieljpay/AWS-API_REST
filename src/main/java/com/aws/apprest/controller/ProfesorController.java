@@ -23,7 +23,7 @@ public class ProfesorController {
     }
 
     @GetMapping(path = "/profesores/{id}")
-    public ResponseEntity<Profesor> getProfesor(@PathVariable int id) {
+    public ResponseEntity<Profesor> getProfesor(@PathVariable long id) {
         Profesor profesor = profesorService.get(id);
         if (profesor == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -38,7 +38,7 @@ public class ProfesorController {
     }
 
     @PutMapping(path = "/profesores/{id}")
-    public ResponseEntity<String> updateProfesor(@PathVariable int id, @RequestBody @Validated Profesor profesor) {
+    public ResponseEntity<String> updateProfesor(@PathVariable long id, @RequestBody @Validated Profesor profesor) {
         if(!profesorService.update(id, profesor)) {
             return new ResponseEntity<>("Profesor: ", HttpStatus.OK);
         }
@@ -46,7 +46,7 @@ public class ProfesorController {
     }
 
     @DeleteMapping(path = "/profesores/{id}")
-    public ResponseEntity<String> deleteProfesor(@PathVariable int id) {
+    public ResponseEntity<String> deleteProfesor(@PathVariable long id) {
         if (!profesorService.delete(id)) {
             return new ResponseEntity<>("Profesor: ", HttpStatus.NOT_FOUND);
         }

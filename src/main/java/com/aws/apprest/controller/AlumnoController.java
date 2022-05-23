@@ -25,7 +25,7 @@ public class AlumnoController {
     }
 
     @GetMapping(path = "/alumnos/{id}")
-    public ResponseEntity<Alumno> getAlumno(@PathVariable int id) {
+    public ResponseEntity<Alumno> getAlumno(@PathVariable long id) {
         Alumno alumno = alumnoService.get(id);
         if(alumno == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -40,7 +40,7 @@ public class AlumnoController {
     }
 
     @PutMapping(path = "/alumnos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateAlumno(@PathVariable int id, @RequestBody @Validated Alumno alumno) {
+    public ResponseEntity<String> updateAlumno(@PathVariable long id, @RequestBody @Validated Alumno alumno) {
         if(!alumnoService.update(id, alumno)) {
             return new ResponseEntity<>("Alumno: ", HttpStatus.NOT_FOUND);
         }
@@ -48,7 +48,7 @@ public class AlumnoController {
     }
 
     @DeleteMapping(path = "/alumnos/{id}")
-    public ResponseEntity<String> deleteAlumno(@PathVariable int id) {
+    public ResponseEntity<String> deleteAlumno(@PathVariable long id) {
         if(!alumnoService.delete(id)) {
             return new ResponseEntity<>("Alumno: ", HttpStatus.NOT_FOUND);
         }
